@@ -19,7 +19,12 @@ do
 		echo "Version ${TYPO3_VERSION}.${MINOR} already exists. Skipping..."
 	else
 		echo "Downloading ${TYPO3_VERSION}.${MINOR}"
-		cd ${DOWNLOAD_PATH}
-		wget --content-disposition -q --show-progress http://get.typo3.org/${TYPO3_VERSION}.${MINOR}
+		cd /tmp
+		wget --content-disposition -q --show-progress http://downloads.sourceforge.net/project/typo3/TYPO3%20Source%20and%20Dummy/TYPO3%20${TYPO3_VERSION}.${MINOR}/typo3_src-${TYPO3_VERSION}.${MINOR}.tar.gz
+		if [ $? -eq 0 ]; then
+			mv /tmp/typo3_src-${TYPO3_VERSION}.${MINOR}.tar.gz ${DOWNLOAD_PATH}/typo3_src-${TYPO3_VERSION}.${MINOR}.tar.gz
+		else
+			echo "Oops something went wrong. Not copying typo3_src-${TYPO3_VERSION}.${MINOR}.tar.gz"
+		fi
 	fi
 done 
